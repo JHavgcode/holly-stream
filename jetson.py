@@ -7,6 +7,10 @@ from nanocamera import Camera
 from model import ObjectDetection
 from utilities import EnvArgumentParser
 
+from deep_sort.utils_ds.parser import get_config
+from deep_sort.deep_sort import DeepSort
+from deep_sort.deep_sort.sort.tracker import Tracker
+
 
 def main(
 		object_detection,
@@ -41,8 +45,7 @@ def main(
 		flip=0,
 		width=camera_width,
 		height=camera_height,
-		fps=camera_fps,
-		enforce_fps=True
+		fps=camera_fps
 	)
 
 	command = [
@@ -63,23 +66,26 @@ def main(
 
 	p = subprocess.Popen(command, stdin=subprocess.PIPE)
 
-	# track_index = 
 	if object_detection:
 		assets = Assets()
 		model = ObjectDetection(model_path)
-		track_step = 2
-		track_index = 0
+		# weights = 'deep_sort/deep/checkpoint/ckpt.t7'
+		# tracker = DeepSort(model_path=weights, max_age=10)
+
+		# frames = []
+		# i = 0
+		# counter, fps, elapsed = 0, 0, 0
+		# start_time = time.perf_counter()
 
 		while camera.isReady():
 			frame = camera.read()
 
-			if track_index % track_step == 0:
-				results = model(
-					frame=frame,
-					classes=classes,
-					confidence_threshold=confidence_threshold,
-					iou_threshold=iou_threshold
-				)
+			results = model(
+				frame=frame,
+				classes=classes,
+				confidence_threshold=confidence_threshold,
+				iou_threshold=iou_threshold
+			)
 
 			for result in results:
 				score = result['score']

@@ -93,8 +93,8 @@ class ObjectDetection():
         )[0]
         preds[:, :4] = scale_coords(img.shape[2:], preds[:, :4], img0.shape).round()
 
-        height, width = img0.shape[:2]
         bboxes = [item[:4] for item in preds]
+        # bboxes = item[]
         conf = [round(float(item[4]), 2) for item in preds]
         obj = [int(item[5]) for item in preds]
         names = [self.classes[item] for item in obj]
