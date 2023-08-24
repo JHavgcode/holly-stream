@@ -75,8 +75,6 @@ RUN apt-get install -y libjpeg-dev zlib1g-dev libpython3-dev libfreetype6-dev &&
     export BUILD_VERSION=${TORCHVISION_VERSION} && \
     python3 setup.py install --user
 
-RUN pip3 install nanocamera scikit-learn==0.18.2
-
 WORKDIR ${APPDIR}
 
 RUN apt install -y gfortran && \
