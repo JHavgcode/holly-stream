@@ -30,7 +30,7 @@ In order to allow Docker access to your Jetson Nano GPU, you will have to add th
 Once you add the line, restart the docker daemon with `sudo systemctl restart docker`.
 
 ## Install Docker Compose (required)
-Install this on the Ubuntu system Python environment (not inside a Conda or Virtualenv evironment):
+Install this on the Ubuntu system Python environment (not inside a Conda or Virtualenv environment):
 ```bash
 pip3 install --upgrade pip
 pip3 install docker-compose==1.27.4
